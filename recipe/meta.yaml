@@ -13,65 +13,25 @@ source:
 
 build:
   number: 0
-  skip: True  # [win or (osx and (python_impl == 'cpython' and py<38))]
+  skip: True  # [win]
 
-outputs:
-  - name: {{ name|lower }}
-    script: build.sh  # [unix]
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('fortran') }}
+    - meson 0.53.*
+    - ninja
+    - asciidoctor
+  host:
+    - libblas
+    - llvm-openmp  # [osx]
+    - libgomp  # [linux and not aarch64]
+  run:
+    - libblas
 
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - {{ compiler('fortran') }}
-        - meson >=0.51
-        - ninja
-        - asciidoctor
-      host:
-        - libblas
-        - llvm-openmp  # [osx]
-        - libgomp  # [linux and not aarch64]
-      run:
-        - libblas
-
-    test:
-      commands:
-        - s-dftd3 --version
-
-  - name: {{ name|lower }}-python
-    script: build-python.sh  # [unix]
-
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - meson 0.53.*
-        - ninja
-        - python
-        - cffi
-        - pkg-config
-      host:
-        - python
-        - pip
-        - simple-dftd3
-        - libblas
-        - liblapack
-        - llvm-openmp  # [osx]
-        - libgomp  # [linux and not aarch64]
-      run:
-        - python
-        - cffi
-        - {{ pin_compatible('numpy') }}
-        - {{ pin_subpackage('simple-dftd3', exact=True) }}
-
-    test:
-      imports:
-        - dftd3
-      requires:
-        - pytest
-        - setuptools
-        - qcelemental
-        - ase
-      commands:
-        - pytest --pyargs dftd3 -vv
+test:
+  commands:
+    - s-dftd3 --version
 
 about:
   home: https://github.com/awvwgk/simple-dftd3
