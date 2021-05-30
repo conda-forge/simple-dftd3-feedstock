@@ -84,6 +84,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-simple--dftd3-green.svg)](https://anaconda.org/conda-forge/simple-dftd3) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/simple-dftd3.svg)](https://anaconda.org/conda-forge/simple-dftd3) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/simple-dftd3.svg)](https://anaconda.org/conda-forge/simple-dftd3) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/simple-dftd3.svg)](https://anaconda.org/conda-forge/simple-dftd3) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-simple--dftd3--python-green.svg)](https://anaconda.org/conda-forge/simple-dftd3-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/simple-dftd3-python.svg)](https://anaconda.org/conda-forge/simple-dftd3-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/simple-dftd3-python.svg)](https://anaconda.org/conda-forge/simple-dftd3-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/simple-dftd3-python.svg)](https://anaconda.org/conda-forge/simple-dftd3-python) |
 
 Installing simple-dftd3
 =======================
@@ -92,12 +93,13 @@ Installing `simple-dftd3` from the `conda-forge` channel can be achieved by addi
 
 ```
 conda config --add channels conda-forge
+conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `simple-dftd3` can be installed with:
+Once the `conda-forge` channel has been enabled, `simple-dftd3, simple-dftd3-python` can be installed with:
 
 ```
-conda install simple-dftd3
+conda install simple-dftd3 simple-dftd3-python
 ```
 
 It is possible to list all of the versions of `simple-dftd3` available on your platform with:
@@ -162,9 +164,9 @@ build distinct package versions.
 
 In order to produce a uniquely identifiable distribution:
  * If the version of a package **is not** being increased, please add or increase
-   the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string).
+   the [``build/number``](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string).
  * If the version of a package **is** being increased, please remember to return
-   the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
+   the [``build/number``](https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#build-number-and-string)
    back to 0.
 
 Feedstock Maintainers

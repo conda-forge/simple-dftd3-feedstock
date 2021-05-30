@@ -6,33 +6,72 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/awvwgk/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 1c7fc41f8565eeb1cebbc92d6b617d025b7ff878f1152bc60f363231c98b6ef0
+  url: https://github.com/awvwgk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 3c198cc52fc82c08668656f9b035921a334a372a5e1a7ee9a2b30cae5c13c657
   patches:
-    - meson-wrap.patch
+    - disable-ffibuilder.patch
 
 build:
   number: 0
   skip: True  # [win]
 
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ compiler('fortran') }}
-    - meson >=0.51
-    - ninja
-    - asciidoctor
-  host:
-    - libblas
-    - llvm-openmp  # [osx]
-    - libgomp  # [linux and not aarch64]
-  run:
-    - libblas
+outputs:
+  - name: {{ name|lower }}
+    script: build.sh  # [unix]
 
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ compiler('fortran') }}
+        - meson >=0.51
+        - ninja
+        - asciidoctor
+      host:
+        - libblas
+        - llvm-openmp  # [osx]
+        - libgomp  # [linux and not aarch64]
+      run:
+        - libblas
 
-test:
-  commands:
-    - s-dftd3 --version
+    test:
+      commands:
+        - s-dftd3 --version
+
+  - name: {{ name|lower }}-python
+    script: build-python.sh  # [unix]
+
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - meson 0.53.*
+        - ninja
+        - python
+        - cffi
+        - pkg-config
+      host:
+        - python
+        - pip
+        - simple-dftd3
+        - libblas
+        - liblapack
+        - llvm-openmp  # [osx]
+        - libgomp  # [linux and not aarch64]
+      run:
+        - python
+        - cffi
+        - {{ pin_compatible('numpy') }}
+        - {{ pin_compatible('simple-dftd3', max_pin='x.x') }}
+
+    test:
+      imports:
+        - dftd3
+      requires:
+        - pytest
+        - setuptools
+        - qcelemental
+        - ase
+      commands:
+        - pytest --pyargs dftd3 -vv
 
 about:
   home: https://github.com/awvwgk/simple-dftd3
