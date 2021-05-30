@@ -1,5 +1,5 @@
 {% set name = "simple-dftd3" %}
-{% set version = "0.3.0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [win]
+  skip: True  # [win or (osx and (python_impl == 'cpython' and py<38))]
 
 outputs:
   - name: {{ name|lower }}
@@ -60,7 +60,7 @@ outputs:
         - python
         - cffi
         - {{ pin_compatible('numpy') }}
-        - {{ pin_compatible('simple-dftd3', max_pin='x.x') }}
+        - {{ pin_subpackage('simple-dftd3', exact=True) }}
 
     test:
       imports:
