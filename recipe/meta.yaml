@@ -19,7 +19,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
-    - meson 0.53.*
+    - meson 0.55.*
     - ninja
     - asciidoctor
   host:
