@@ -1,5 +1,5 @@
 {% set name = "simple-dftd3" %}
-{% set version = "0.4.0" %}
+{% set version = "0.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/awvwgk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 3c198cc52fc82c08668656f9b035921a334a372a5e1a7ee9a2b30cae5c13c657
+  sha256: 79b507a0d892f19222e1403f4c7ebb98ce9eb96b3b8d4821ba5631aa9ac756be
   patches:
     - disable-ffibuilder.patch
 
