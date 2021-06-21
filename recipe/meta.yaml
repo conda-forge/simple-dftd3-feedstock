@@ -8,8 +8,6 @@ package:
 source:
   url: https://github.com/awvwgk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 79b507a0d892f19222e1403f4c7ebb98ce9eb96b3b8d4821ba5631aa9ac756be
-  patches:
-    - disable-ffibuilder.patch
 
 build:
   number: 0
