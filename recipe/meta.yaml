@@ -10,8 +10,10 @@ source:
   sha256: 79b507a0d892f19222e1403f4c7ebb98ce9eb96b3b8d4821ba5631aa9ac756be
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
+  run_exports:
+    - {{ pin_subpackage('simple-dftd3', max_pin='x.x') }}
 
 requirements:
   build:
