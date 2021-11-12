@@ -2,7 +2,7 @@
 set -ex
 
 meson_options=(
-   ${MESON_ARGS:--prefix=${PREFIX} --libdir=lib}
+   ${MESON_ARGS:---prefix=${PREFIX} --libdir=lib}
    "--buildtype=release"
    "--default-library=shared"
    "--warnlevel=0"
