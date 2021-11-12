@@ -2,8 +2,7 @@
 set -ex
 
 meson_options=(
-   "--prefix=${PREFIX}"
-   "--libdir=lib"
+   ${MESON_ARGS:--prefix=${PREFIX} --libdir=lib}
    "--buildtype=release"
    "--default-library=shared"
    "--warnlevel=0"
@@ -21,4 +20,5 @@ else
     meson "${meson_options[@]}"
 fi
 
-ninja test install
+meson test --print-errorlogs --num-processes 1 -t 5
+meson install
