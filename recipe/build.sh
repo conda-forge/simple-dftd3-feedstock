@@ -9,9 +9,9 @@ meson_options=(
    "-Dblas=netlib"
 )
 
-mkdir -p _build
-pushd _build
-
-meson setup "${meson_options[@]}" ..
-meson test --print-errorlogs --num-processes 1 -t 5
-meson install
+meson setup _build "${meson_options[@]}"
+meson compile -C _build
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
+  meson test -C _build --print-errorlogs --num-processes 1 -t 5
+fi
+meson install -C _build
