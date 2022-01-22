@@ -8,31 +8,46 @@ package:
 source:
   url: https://github.com/awvwgk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 47b2614c911085690075dda5af70391c93d9a43fe067eae15bb6db72eac33aab
+  patches:
+    - wrap.patch
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
+  script:
+    - set -ex  # [unix]
+    - meson setup _build ${MESON_ARGS:---prefix=${PREFIX} --libdir=lib} --buildtype=release -Dblas=netlib  # [unix]
+    - meson setup _build --prefix=%PREFIX% --buildtype=release --pkg-config-path=%PREFIX%\lib\pkgconfig  # [win]
+    - meson compile -C _build
+    - meson test -C _build --no-rebuild --print-errorlogs  # [build_platform == target_platform]
+    - meson install -C _build --no-rebuild
+
   run_exports:
-    - {{ pin_subpackage('simple-dftd3', max_pin='x.x') }}
+    - {{ pin_subpackage(name, max_pin='x.x') }}
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}  # [unix]
+    - {{ compiler('fortran') }}  # [unix]
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('m2w64_fortran') }}  # [win]
     - meson
     - ninja
-    - asciidoctor
+    - asciidoctor  # [unix]
+    - pkg-config
     - llvm-openmp  # [osx]
     - libgomp  # [linux]
   host:
-    - libblas
+    - libblas  # [unix]
     - mctc-lib
+    - toml-f
   run:
     - mctc-lib
+    - toml-f
 
 test:
   commands:
     - s-dftd3 --version
+    - test -f $PREFIX/lib/libs-dftd3$SHLIB_EXT  # [unix]
 
 about:
   home: https://github.com/awvwgk/simple-dftd3
