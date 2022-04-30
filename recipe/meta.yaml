@@ -1,5 +1,5 @@
 {% set name = "simple-dftd3" %}
-{% set version = "0.5.1" %}
+{% set version = "0.6.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/awvwgk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 3d775608bf85cd389385a84ea5586ede57215ff9cff646480552ca835a9de9ca
+  sha256: 4bef311f8e5a2c32141eddeea65615c3c8480f917cd884488ede059fb0962a50
   patches:
     - wrap.patch
 
@@ -16,12 +16,15 @@ build:
   script:
     - set -ex  # [unix]
     - mv $PREFIX/lib/pkgconfig/blas.pc $SRC_DIR  # [unix]
-    - meson setup _build ${MESON_ARGS:---prefix=${PREFIX} --libdir=lib} --buildtype=release -Dblas=custom -Dblas_libs=blas  # [unix]
-    - meson setup _build --prefix=%PREFIX% --buildtype=release --pkg-config-path=%PREFIX%\lib\pkgconfig  # [win]
+    - >
+       meson setup _build
+       ${MESON_ARGS:---prefix=${PREFIX} --libdir=lib}  # [unix]
+       --prefix=%LIBRARY_PREFIX% --pkg-config-path=%PREFIX%\lib\pkgconfig  # [win]
+       --buildtype=release
+       -Dblas=custom -Dblas_libs=blas  # [unix]
     - meson compile -C _build
     - meson test -C _build --no-rebuild --print-errorlogs  # [build_platform == target_platform]
     - meson install -C _build --no-rebuild
-    - cat $PREFIX/lib/pkgconfig/s-dftd3.pc  # [unix]
     - mv $SRC_DIR/blas.pc $PREFIX/lib/pkgconfig  # [unix]
 
   run_exports:
@@ -41,9 +44,6 @@ requirements:
     - libgomp  # [linux]
   host:
     - libblas  # [unix]
-    - mctc-lib
-    - toml-f
-  run:
     - mctc-lib
     - toml-f
 
