@@ -1,31 +1,20 @@
 {% set name = "simple-dftd3" %}
-{% set version = "0.6.0" %}
+{% set version = "0.7.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/awvwgk/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 4bef311f8e5a2c32141eddeea65615c3c8480f917cd884488ede059fb0962a50
+  url: https://github.com/dftd3/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 19400a176eb4dcee7b89181a5a5f0033fe6b05c52821e54896a98448761d003a
   patches:
     - wrap.patch
 
 build:
   number: 0
-  script:
-    - set -ex  # [unix]
-    - mv $PREFIX/lib/pkgconfig/blas.pc $SRC_DIR  # [unix]
-    - >
-       meson setup _build
-       ${MESON_ARGS:---prefix=${PREFIX} --libdir=lib}  # [unix]
-       --prefix=%LIBRARY_PREFIX% --pkg-config-path=%PREFIX%\lib\pkgconfig  # [win]
-       --buildtype=release
-       -Dblas=custom -Dblas_libs=blas  # [unix]
-    - meson compile -C _build
-    - meson test -C _build --no-rebuild --print-errorlogs  # [build_platform == target_platform]
-    - meson install -C _build --no-rebuild
-    - mv $SRC_DIR/blas.pc $PREFIX/lib/pkgconfig  # [unix]
+  skip: true  # [win]
+  skip: true  # [osx and arm64]
 
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
@@ -57,14 +46,15 @@ test:
     - pkg-config s-dftd3 --exact-version {{ version }}
 
 about:
-  home: https://github.com/awvwgk/simple-dftd3
+  home: https://dftd3.readthedocs.io
   license: LGPL-3.0-or-later
   license_family: LGPL
   license_file:
     - COPYING
     - COPYING.LESSER
   summary: Simple reimplementation of the DFT-D3 model
-  doc_url: https://awvwgk.github.io/simple-dftd3/
+  dev_url: https://github.com/dftd3/simple-dftd3
+  doc_url: https://dftd3.github.io/simple-dftd3/
 
 extra:
   recipe-maintainers:
