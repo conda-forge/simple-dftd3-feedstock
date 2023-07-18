@@ -1,11 +1,11 @@
-About simple-dftd3
-==================
+About simple-dftd3-feedstock
+============================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/simple-dftd3-feedstock/blob/main/LICENSE.txt)
 
 Home: https://dftd3.readthedocs.io
 
 Package license: LGPL-3.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/simple-dftd3-feedstock/blob/main/LICENSE.txt)
 
 Summary: Simple reimplementation of the DFT-D3 model
 
