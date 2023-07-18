@@ -1,5 +1,5 @@
 {% set name = "simple-dftd3" %}
-{% set version = "0.7.0" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/dftd3/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 19400a176eb4dcee7b89181a5a5f0033fe6b05c52821e54896a98448761d003a
+  sha256: fac3d9f785562b178dcf8e89f8d27782b8bda45fcd9dbaccc359b5def4fb1cf6
   patches:
     - wrap.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
   run_exports:
