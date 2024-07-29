@@ -15,9 +15,7 @@ EOF
 fi
 
 meson setup _build \
-  ${MESON_ARGS} \
-  --buildtype=release -Dblas=custom \
-  -Dblas_libs=blas
+  ${MESON_ARGS}
 
 meson compile -C _build
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
