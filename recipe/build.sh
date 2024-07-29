@@ -2,8 +2,6 @@
 
 set -ex
 
-mv $PREFIX/lib/pkgconfig/blas.pc $SRC_DIR
-
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
   MESON_ARGS=${MESON_ARGS:---prefix=${PREFIX} --libdir=lib}
 else
@@ -15,14 +13,10 @@ EOF
 fi
 
 meson setup _build \
-  ${MESON_ARGS} \
-  --buildtype=release -Dblas=custom \
-  -Dblas_libs=blas
+  ${MESON_ARGS}
 
 meson compile -C _build
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
   meson test -C _build --no-rebuild --print-errorlogs
 fi
 meson install -C _build --no-rebuild
-
-mv $SRC_DIR/blas.pc $PREFIX/lib/pkgconfig

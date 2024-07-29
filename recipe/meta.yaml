@@ -1,5 +1,5 @@
 {% set name = "simple-dftd3" %}
-{% set version = "1.0.0" %}
+{% set version = "1.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/dftd3/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: fac3d9f785562b178dcf8e89f8d27782b8bda45fcd9dbaccc359b5def4fb1cf6
+  sha256: 52e43c7d860c8742876baab59d0e93e5c91963d1fecf11fd218655c6740281b1
   patches:
     - wrap.patch
 
@@ -21,8 +21,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}  # [unix]
+    - {{ stdlib("c") }}    # [unix]
     - {{ compiler('fortran') }}  # [unix]
     - {{ compiler('m2w64_c') }}  # [win]
+    - {{ stdlib("m2w64_c") }}    # [win]
     - {{ compiler('m2w64_fortran') }}  # [win]
     - meson
     - ninja
@@ -31,7 +33,6 @@ requirements:
     - llvm-openmp  # [osx]
     - libgomp  # [linux]
   host:
-    - libblas
     - mctc-lib
     - toml-f
 
