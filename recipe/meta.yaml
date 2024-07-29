@@ -33,7 +33,6 @@ requirements:
     - llvm-openmp  # [osx]
     - libgomp  # [linux]
   host:
-    - libblas
     - mctc-lib
     - toml-f
 
