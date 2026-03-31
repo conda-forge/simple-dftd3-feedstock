@@ -3,7 +3,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 set "PKG_CONFIG_PATH=%LIBRARY_LIB%\pkgconfig;%LIBRARY_PREFIX%\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
 
-meson setup _build --prefix=%LIBRARY_PREFIX%
+meson setup _build %MESON_ARGS% -Dprefix=%LIBRARY_PREFIX% -Ddefault_library=shared
 if errorlevel 1 exit 1
 
 meson compile -C _build
