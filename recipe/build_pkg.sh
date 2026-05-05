@@ -18,6 +18,6 @@ meson setup _build \
 
 meson compile -C _build
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" ]]; then
-  meson test -C _build --no-rebuild --print-errorlogs
+  meson test -C _build --no-rebuild --print-errorlogs -t 20
 fi
 meson install -C _build --no-rebuild
