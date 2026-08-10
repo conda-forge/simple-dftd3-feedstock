@@ -1,0 +1,38 @@
+diff --git a/test/unit/test_output.f90 b/test/unit/test_output.f90
+index ea64ce7..3eed500 100644
+--- a/test/unit/test_output.f90
++++ b/test/unit/test_output.f90
+@@ -59,6 +59,7 @@ subroutine test_gradient_corrupt(error)
+    type(structure_type) :: mol
+    real(wp) :: gradient(3, nat)
+    integer :: stat, io
++   integer :: stat_close
+ 
+    call new(mol, num, xyz)
+    gradient = 0.0_wp
+@@ -77,7 +78,7 @@ subroutine test_gradient_corrupt(error)
+    call turbomole_gradient(mol, fname, 0.0_wp, gradient, stat)
+ 
+    open(newunit=io, file=fname, status="old")
+-   close(io, status="delete")
++   close(io, status="delete", iostat=stat_close)
+ 
+    call check(error, stat, 1)
+    if (allocated(error)) return
+@@ -104,6 +105,7 @@ subroutine test_gradlatt_corrupt(error)
+    type(structure_type) :: mol
+    real(wp) :: sigma(3, 3)
+    integer :: stat, io
++   integer :: stat_close
+ 
+    call new(mol, num, xyz, periodic=[.true.], lattice=lattice)
+    sigma = 0.0_wp
+@@ -124,7 +126,7 @@ subroutine test_gradlatt_corrupt(error)
+    call turbomole_gradlatt(mol, fname, 0.0_wp, sigma, stat)
+ 
+    open(newunit=io, file=fname, status="old")
+-   close(io, status="delete")
++   close(io, status="delete", iostat=stat_close)
+ 
+    call check(error, stat, 1)
+    if (allocated(error)) return
