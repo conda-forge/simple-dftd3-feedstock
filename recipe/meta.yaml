@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/dftd3/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
   sha256: 64a3cb126acddb0aaffd87b1e54f35eca0c30f63bc675cdb8ad523373c7c396f
+  patches:
+    - output-test.patch  # [win]
 
 build:
   number: 0
