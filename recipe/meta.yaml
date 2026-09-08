@@ -77,7 +77,7 @@ about:
   license_file:
     - COPYING
     - COPYING.LESSER
-  summary: Simple reimplementation of the DFT-D3 model
+  summary: Library first implementation of the D3 dispersion correction
   dev_url: https://github.com/dftd3/simple-dftd3
   doc_url: https://dftd3.github.io/simple-dftd3/
 
