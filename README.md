@@ -7,7 +7,7 @@ Home: https://dftd3.readthedocs.io
 
 Package license: LGPL-3.0-or-later
 
-Summary: Simple reimplementation of the DFT-D3 model
+Summary: Library first implementation of the D3 dispersion correction
 
 Development: https://github.com/dftd3/simple-dftd3
 
@@ -38,17 +38,45 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>osx_64</td>
+              <td>osx_64_mpimpichmpi_prefixmpi_mpich</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=11844&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_mpimpichmpi_prefixmpi_mpich" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64</td>
+              <td>osx_64_mpinompimpi_prefixnompi</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=11844&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_mpinompimpi_prefixnompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_mpiopenmpimpi_prefixmpi_openmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=11844&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_mpiopenmpimpi_prefixmpi_openmpi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_mpimpichmpi_prefixmpi_mpich</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=11844&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_mpimpichmpi_prefixmpi_mpich" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_mpinompimpi_prefixnompi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=11844&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_mpinompimpi_prefixnompi" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64_mpiopenmpimpi_prefixmpi_openmpi</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=11844&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/simple-dftd3-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_mpiopenmpimpi_prefixmpi_openmpi" alt="variant">
                 </a>
               </td>
             </tr>

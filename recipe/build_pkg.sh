@@ -12,8 +12,15 @@ EOF
   MESON_ARGS="${MESON_ARGS:---prefix=${PREFIX} --libdir=lib} --cross-file pkgconfig.ini"
 fi
 
+if [ "${mpi}" != "nompi" ]; then
+  MPI=true
+else
+  MPI=false
+fi 
+
 meson setup _build \
   -Ddefault_library=shared \
+  -Dmpi=$MPI \
   ${MESON_ARGS}
 
 meson compile -C _build

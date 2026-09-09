@@ -1,2 +1,14 @@
 module_abi:
   - gfortran
+
+mpi:
+  - nompi
+  - mpich    # [unix]
+  - openmpi  # [unix]
+mpi_prefix:
+  - nompi
+  - mpi_mpich    # [unix]
+  - mpi_openmpi  # [unix]
+zip_keys:
+  - mpi
+  - mpi_prefix

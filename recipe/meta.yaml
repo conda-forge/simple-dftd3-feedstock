@@ -12,16 +12,18 @@ source:
     - output-test.patch  # [win]
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: {{ name }}
     script: build_pkg.sh  # [unix]
     script: build_pkg.bat  # [win]
     build:
-      string: {{ module_abi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+
+      string: {{ module_abi }}_{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       run_exports:
         - {{ pin_subpackage(name, max_pin='x.x') }}
+        - {{ name }} * *{{ mpi_prefix }}_*  # [mpi != "nompi"]
 
     requirements:
       build:
@@ -36,11 +38,13 @@ outputs:
         - pkg-config
         - llvm-openmp  # [osx]
       host:
+        - {{ mpi }}  # [mpi != "nompi"]
         - libgomp  # [linux]
         - llvm-openmp  # [osx]
         - mctc-lib-devel * {{ module_abi }}_*
         - toml-f-devel * {{ module_abi }}_*
       run:
+        - {{ mpi }}  # [mpi != "nompi"]
         - llvm-openmp  # [osx]
 
     test:
@@ -54,15 +58,17 @@ outputs:
 
   - name: {{ name }}-devel
     build:
-      string: {{ module_abi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      string: {{ module_abi }}_{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
       run_exports:
         - {{ pin_subpackage(name, max_pin='x.x') }}
         - {{ name }} * {{ module_abi }}_*
+        - {{ name }} * *{{ mpi_prefix }}_*  # [mpi != "nompi"]
 
     requirements:
       run:
         - {{ pin_subpackage(name, max_pin='x.x') }}
         - {{ name }} * {{ module_abi }}_*
+        - {{ name }} * *{{ mpi_prefix }}_*  # [mpi != "nompi"]
 
     test:
       requires:
